@@ -1,0 +1,10 @@
+#source reference Docker Docs: https://docs.docker.com/build/building/multi-stage/
+#&&
+#source Fedora Docs:https://docs.fedoraproject.org/en-US/iot/build-docker/
+
+FROM alpine:latest AS builder
+COPY data.txt ./
+
+FROM fedora AS final
+WORKDIR /var/www/html/
+COPY  --from=builder ./data.txt ./data.txt
